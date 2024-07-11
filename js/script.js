@@ -151,6 +151,7 @@ async function getMidChampions() {
     return champions;
 }
 
+//RE
 async function getBotChampions() {
     let champions = []
 
