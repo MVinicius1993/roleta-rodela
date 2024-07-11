@@ -20,14 +20,14 @@ async function main() {
 }
 
 async function getChampionsInfo() {
-    return await fetch('https://github.com/MVinicius1993/roleta-rodela/datadragon/champion.json').then(async (results) => {
+    return await fetch('https://github.com/MVinicius1993/roleta-rodela/datadragon/champion.json', {mode: 'no-cors'}).then(async (results) => {
         const resultJson = await results.json();
         return resultJson.data;
     });
 }
 
 async function getPositionsInfo() {
-    return await fetch('https://github.com/MVinicius1993/roleta-rodela/datadragon/positions.json').then(async (results) => {
+    return await fetch('https://github.com/MVinicius1993/roleta-rodela/datadragon/positions.json', {mode: 'no-cors'}).then(async (results) => {
         const resultJson = await results.json();
         return resultJson.data;
     });
