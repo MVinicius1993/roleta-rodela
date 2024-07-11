@@ -20,14 +20,14 @@ async function main() {
 }
 
 async function getChampionsInfo() {
-    return await fetch('/datadragon/champion.json').then(async (results) => {
+    return await fetch('https://github.com/MVinicius1993/roleta-rodela/datadragon/champion.json').then(async (results) => {
         const resultJson = await results.json();
         return resultJson.data;
     });
 }
 
 async function getPositionsInfo() {
-    return await fetch('/datadragon/positions.json').then(async (results) => {
+    return await fetch('https://github.com/MVinicius1993/roleta-rodela/datadragon/positions.json').then(async (results) => {
         const resultJson = await results.json();
         return resultJson.data;
     });
@@ -75,7 +75,7 @@ async function roleSelectedRodil(evt) {
 
     for (const [index, champ] of championsRools.entries()) {
         const champion = document.createElement("img");
-        champion.src = `https://mvinicius1993.github.io/roleta-rodela//datadragon/imagens/champions/${champ.id}_0.jpg`;
+        champion.src = `https://mvinicius1993.github.io/roleta-rodela/datadragon/imagens/champions/${champ.id}_0.jpg`;
         champion.id = `rodil-${champ.key}`;
         champion.style.paddingLeft = '40px'
         champion.classList.add( index > 0 ? 'notSelected' : 'selected')
@@ -111,7 +111,7 @@ async function roleSelectedTibinha(evt) {
 
     for (const [index, champ] of championsRools.entries()) {
         const champion = document.createElement("img");
-        champion.src = `https://mvinicius1993.github.io/roleta-rodela//datadragon/imagens/champions/${champ.id}_0.jpg`;
+        champion.src = `https://mvinicius1993.github.io/roleta-rodela/datadragon/imagens/champions/${champ.id}_0.jpg`;
         champion.id = `tibinha-${champ.key}`;
         champion.style.paddingLeft = '40px'
         champion.classList.add( index > 0 ? 'notSelected' : 'selected')
