@@ -1,3 +1,6 @@
+import champion from "../datadragon/champion.json" assert { type: "json" }
+import position from "../datadragon/positions.json" assert { type: "json" }
+
 main();
 
 let championsPositions;
@@ -20,17 +23,11 @@ async function main() {
 }
 
 async function getChampionsInfo() {
-    return await fetch('../datadragon/champion.json').then(async (results) => {
-        const resultJson = await results.json();
-        return resultJson.data;
-    });
+    return champion.data;
 }
 
 async function getPositionsInfo() {
-    return await fetch('../datadragon/positions.json').then(async (results) => {
-        const resultJson = await results.json();
-        return resultJson.data;
-    });
+    return position.data;
 }
 
 async function setChampionsPositions(champions, positions) {
@@ -323,3 +320,8 @@ function revelarDesafio() {
     span.id = `desafio-${selectedDesafio.id}`; // Atribuir um ID único ao span
     htmlDesafios.appendChild(span);
 }
+
+window.roleSelectedRodil = roleSelectedRodil
+window.roleSelectedTibinha = roleSelectedTibinha
+window.rodilRoll = rodilRoll
+window.tibinhaRoll = tibinhaRoll
