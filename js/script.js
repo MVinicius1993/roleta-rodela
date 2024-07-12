@@ -20,20 +20,14 @@ async function main() {
 }
 
 async function getChampionsInfo() {
-    return await fetch('../datadragon/champion.json', {mode: 'cors',
-  headers: {
-    'Access-Control-Allow-Origin':'*'
-  }}).then(async (results) => {
+    return await fetch('../datadragon/champion.json').then(async (results) => {
         const resultJson = await results.json();
         return resultJson.data;
     });
 }
 
 async function getPositionsInfo() {
-    return await fetch('../datadragon/positions.json', {mode: 'cors',
-  headers: {
-    'Access-Control-Allow-Origin':'*'
-  }}).then(async (results) => {
+    return await fetch('../datadragon/positions.json').then(async (results) => {
         const resultJson = await results.json();
         return resultJson.data;
     });
