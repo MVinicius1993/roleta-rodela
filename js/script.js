@@ -20,7 +20,7 @@ async function main() {
 }
 
 async function getChampionsInfo() {
-    return await fetch('https://github.com/MVinicius1993/roleta-rodela/datadragon/champion.json', {mode: 'cors',
+    return await fetch('../datadragon/champion.json', {mode: 'cors',
   headers: {
     'Access-Control-Allow-Origin':'*'
   }}).then(async (results) => {
@@ -30,7 +30,7 @@ async function getChampionsInfo() {
 }
 
 async function getPositionsInfo() {
-    return await fetch('https://github.com/MVinicius1993/roleta-rodela/datadragon/positions.json', {mode: 'cors',
+    return await fetch('../datadragon/positions.json', {mode: 'cors',
   headers: {
     'Access-Control-Allow-Origin':'*'
   }}).then(async (results) => {
