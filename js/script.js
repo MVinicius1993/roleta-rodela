@@ -325,3 +325,4 @@ window.roleSelectedRodil = roleSelectedRodil
 window.roleSelectedTibinha = roleSelectedTibinha
 window.rodilRoll = rodilRoll
 window.tibinhaRoll = tibinhaRoll
+window.revelarDesafio = revelarDesafio  
