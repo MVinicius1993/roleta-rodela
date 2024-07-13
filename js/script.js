@@ -187,7 +187,13 @@ async function rodilRoll() {
     const numeros = championsPool1.map(e => parseInt(e.key));
 
     const divChampions = document.getElementById('champions')
-    debugger
+
+    var children = divChampions.children;
+
+    for (var i = 0; i < children.length; i++) {
+        children[i].classList.remove('selected');
+        children[i].classList.add('notSelected');
+    }
 
     for (const numId of numeros) {
         document.getElementById(`rodil-${numeroFinalRodil}`)?.classList.add('notSelected');
@@ -255,7 +261,13 @@ async function tibinhaRoll() {
     const numeros = championsPool2.map(e => parseInt(e.key));
 
     const divChampions = document.getElementById('champions2')
-    divChampions.innerHTML = ''
+
+    var children = divChampions.children;
+
+    for (var i = 0; i < children.length; i++) {
+        children[i].classList.remove('selected');
+        children[i].classList.add('notSelected');
+    }
 
     for (const numId of numeros) {
         document.getElementById(`tibinha-${numeroFinalTibinha}`)?.classList.add('notSelected');
