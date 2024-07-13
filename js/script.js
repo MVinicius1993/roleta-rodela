@@ -42,7 +42,6 @@ async function getItems() {
     Object.values(item.data).forEach(item => {
         if(item.gold.total > 2199 && item.maps[11] === true) return filteredItems.push(item)
     })
-    debugger
     return filteredItems;
 }
 
@@ -338,7 +337,7 @@ function revelarDesafio() {
         {text: "Não pode usar Smite", id: '2'},
         {text: "Inverter lane com o tibinha (tibinha vai pra jungle e vc pro top)", id: '3'},
         {text: "Não pode gankar o tibinha", id: '4'},
-        {text: `Voce tem que buildar o item => <img src='../datadragon/imagens/item/${itemsInfo[Math.floor(Math.random() * itemsInfo.length)].image.full}'/>`, id: '5'},
+        {text: `Voce tem que buildar o item => <img src='${isLocal ? '..' : 'https://mvinicius1993.github.io/roleta-rodela'}/datadragon/imagens/item/${itemsInfo[Math.floor(Math.random() * itemsInfo.length)].image.full}'/>`, id: '5'},
         {text: "Divar uma lane AGORA", id: '6'},
         {text: "Camera fixa", id: '7'},
         {text: "Não pode wardar nem usar trincket", id: '8'},
