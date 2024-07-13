@@ -1,23 +1,30 @@
 import champion from "../datadragon/champion.json" assert { type: "json" }
 import position from "../datadragon/positions.json" assert { type: "json" }
+import item from "../datadragon/item.json" assert { type: "json" }
 
 main();
 
+let itemsInfo;
 let championsPositions;
 let championsPool1;
 let championsPool2;
 let numeroFinalRodil;
 let numeroFinalTibinha;
 let desafios;
+let isLocal = true
 
-const challenges = {
-    
-}
+let index = 0;
+const delay1 = 150;
+const delay2 = 200;
+const delay3 = 250;
+const delay4 = 300;
+const finalDelay = 5000;
 
 async function main() {
     const championsInfo = await getChampionsInfo();
     const positionsInfo = await getPositionsInfo();
 
+    itemsInfo = await getItems();
     championsPositions = await setChampionsPositions(championsInfo, positionsInfo)
     desafios = generateUniqueRandomNumbers(1, 9)
 }
@@ -28,6 +35,15 @@ async function getChampionsInfo() {
 
 async function getPositionsInfo() {
     return position.data;
+}
+
+async function getItems() {
+    const filteredItems = []
+    Object.values(item.data).forEach(item => {
+        if(item.gold.total > 2199 && item.maps[11] === true) return filteredItems.push(item)
+    })
+    debugger
+    return filteredItems;
 }
 
 async function setChampionsPositions(champions, positions) {
@@ -72,7 +88,7 @@ async function roleSelectedRodil(evt) {
 
     for (const [index, champ] of championsRools.entries()) {
         const champion = document.createElement("img");
-        champion.src = `https://mvinicius1993.github.io/roleta-rodela/datadragon/imagens/champions/${champ.id}_0.jpg`;
+        champion.src = `${isLocal ? '..' : 'https://mvinicius1993.github.io/roleta-rodela'}/datadragon/imagens/champions/${champ.id}_0.jpg`;
         champion.id = `rodil-${champ.key}`;
         champion.style.paddingLeft = '40px'
         champion.classList.add( index > 0 ? 'notSelected' : 'selected')
@@ -108,7 +124,7 @@ async function roleSelectedTibinha(evt) {
 
     for (const [index, champ] of championsRools.entries()) {
         const champion = document.createElement("img");
-        champion.src = `https://mvinicius1993.github.io/roleta-rodela/datadragon/imagens/champions/${champ.id}_0.jpg`;
+        champion.src = `${isLocal ? '..' : 'https://mvinicius1993.github.io/roleta-rodela'}/datadragon/imagens/champions/${champ.id}_0.jpg`;
         champion.id = `tibinha-${champ.key}`;
         champion.style.paddingLeft = '40px'
         champion.classList.add( index > 0 ? 'notSelected' : 'selected')
@@ -148,7 +164,6 @@ async function getMidChampions() {
     return champions;
 }
 
-//RE
 async function getBotChampions() {
     let champions = []
 
@@ -173,46 +188,65 @@ async function rodilRoll() {
     const numeros = championsPool1.map(e => parseInt(e.key));
 
     for (const numId of numeros) {
-        document.getElementById(`rodil-${numeroFinalRodil}`)?.classList.remove('selected');
         document.getElementById(`rodil-${numeroFinalRodil}`)?.classList.add('notSelected');
+        document.getElementById(`rodil-${numeroFinalRodil}`)?.classList.remove('selected');
         document.getElementById('rodilRoll').disabled = true
     }
     
-    return new Promise((resolve) => {
-        let index = 0;
+    function atualizarClasse(indexAtual, indexProximo) {
+        if (numeros[indexAtual] !== undefined) {
+            const elementoAtual = document.getElementById(`rodil-${numeros[indexAtual]}`);
+            elementoAtual?.classList.add('notSelected');
+            elementoAtual?.classList.remove('selected');
+        }
 
-        const intervalo = setInterval(() => {
-            if (numeros[index] !== undefined) {
-                document.getElementById(`rodil-${numeros[index]}`)?.classList.add('notSelected');
-                document.getElementById(`rodil-${numeros[index]}`)?.classList.remove('selected');
-            }
+        if (numeros[indexProximo] !== undefined) {
+            const elementoProximo = document.getElementById(`rodil-${numeros[indexProximo]}`);
+            elementoProximo?.classList.remove('notSelected');
+            elementoProximo?.classList.add('selected');
+        }
+    }
 
-            if (numeros[(index + 1) % numeros.length] !== undefined) {
-                document.getElementById(`rodil-${numeros[(index + 1) % numeros.length]}`)?.classList.remove('notSelected');
-                document.getElementById(`rodil-${numeros[(index + 1) % numeros.length]}`)?.classList.add('selected');
-            }
+    function iniciarIntervalo(tempo, proximoDelay) {
+        return setInterval(() => {
+            const proximoIndex = (index + 1) % numeros.length;
+            atualizarClasse(index, proximoIndex);
+            index = proximoIndex;
+        }, tempo);
+    }
 
-            // Atualiza o índice
-            index = (index + 1) % numeros.length;
-        }, 50); // A cada 100 ms
+    const intervalo1 = iniciarIntervalo(delay1, delay2);
 
-        // Após 3 segundos, para a roleta e escolhe um número final
+    setTimeout(() => {
+        clearInterval(intervalo1);
+        const intervalo2 = iniciarIntervalo(delay2, delay3);
+
         setTimeout(() => {
-            clearInterval(intervalo);
+            clearInterval(intervalo2);
+            const intervalo3 = iniciarIntervalo(delay3, delay4);
 
-            for (const numId of numeros) {
-                document.getElementById(`rodil-${numId}`)?.classList.remove('selected');
-                document.getElementById(`rodil-${numId}`)?.classList.add('notSelected');
-            }
+            setTimeout(() => {
+                clearInterval(intervalo3);
+                const intervalo4 = iniciarIntervalo(delay4, finalDelay);
 
-            const numeroFinal = numeros[Math.floor(Math.random() * numeros.length)];
+                setTimeout(() => {
+                    clearInterval(intervalo4);
+                    for (const numId of numeros) {
+                        const elemento = document.getElementById(`rodil-${numId}`);
+                        elemento?.classList.remove('selected');
+                        elemento?.classList.add('notSelected');
+                    }
 
-            document.getElementById(`rodil-${numeroFinal}`)?.classList.add('selected');
-            document.getElementById(`rodil-${numeroFinal}`)?.classList.remove('notSelected');
-            numeroFinalRodil = numeroFinal;
-            document.getElementById('rodilRoll').disabled = false
-        }, 3000); // Tempo total da roleta (3 segundos)
-    });
+                    const numeroFinal = numeros[Math.floor(Math.random() * numeros.length)];
+                    const elementoFinal = document.getElementById(`rodil-${numeroFinal}`);
+                    elementoFinal?.classList.add('selected');
+                    elementoFinal?.classList.remove('notSelected');
+                    numeroFinalRodil = numeroFinal;
+                    document.getElementById('rodilRoll').disabled = false;
+                }, finalDelay);
+            }, 1000);
+        }, 1000);
+    }, 1000);
 }
 
 async function tibinhaRoll() {
@@ -224,41 +258,60 @@ async function tibinhaRoll() {
         document.getElementById('tibinhaRoll2').disabled = true
     }
     
-    return new Promise((resolve) => {
-        let index = 0;
+    function atualizarClasse(indexAtual, indexProximo) {
+        if (numeros[indexAtual] !== undefined) {
+            const elementoAtual = document.getElementById(`tibinha-${numeros[indexAtual]}`);
+            elementoAtual?.classList.add('notSelected');
+            elementoAtual?.classList.remove('selected');
+        }
 
-        const intervalo = setInterval(() => {
-            if (numeros[index] !== undefined) {
-                document.getElementById(`tibinha-${numeros[index]}`)?.classList.add('notSelected');
-                document.getElementById(`tibinha-${numeros[index]}`)?.classList.remove('selected');
-            }
+        if (numeros[indexProximo] !== undefined) {
+            const elementoProximo = document.getElementById(`tibinha-${numeros[indexProximo]}`);
+            elementoProximo?.classList.remove('notSelected');
+            elementoProximo?.classList.add('selected');
+        }
+    }
 
-            if (numeros[(index + 1) % numeros.length] !== undefined) {
-                document.getElementById(`tibinha-${numeros[(index + 1) % numeros.length]}`)?.classList.remove('notSelected');
-                document.getElementById(`tibinha-${numeros[(index + 1) % numeros.length]}`)?.classList.add('selected');
-            }
+    function iniciarIntervalo(tempo, proximoDelay) {
+        return setInterval(() => {
+            const proximoIndex = (index + 1) % numeros.length;
+            atualizarClasse(index, proximoIndex);
+            index = proximoIndex;
+        }, tempo);
+    }
 
-            // Atualiza o índice
-            index = (index + 1) % numeros.length;
-        }, 50); // A cada 100 ms
+    const intervalo1 = iniciarIntervalo(delay1, delay2);
 
-        // Após 3 segundos, para a roleta e escolhe um número final
+    setTimeout(() => {
+        clearInterval(intervalo1);
+        const intervalo2 = iniciarIntervalo(delay2, delay3);
+
         setTimeout(() => {
-            clearInterval(intervalo);
+            clearInterval(intervalo2);
+            const intervalo3 = iniciarIntervalo(delay3, delay4);
 
-            for (const numId of numeros) {
-                document.getElementById(`tibinha-${numId}`)?.classList.remove('selected');
-                document.getElementById(`tibinha-${numId}`)?.classList.add('notSelected');
-            }
+            setTimeout(() => {
+                clearInterval(intervalo3);
+                const intervalo4 = iniciarIntervalo(delay4, finalDelay);
 
-            const numeroFinal = numeros[Math.floor(Math.random() * numeros.length)];
+                setTimeout(() => {
+                    clearInterval(intervalo4);
+                    for (const numId of numeros) {
+                        const elemento = document.getElementById(`tibinha-${numId}`);
+                        elemento?.classList.remove('selected');
+                        elemento?.classList.add('notSelected');
+                    }
 
-            document.getElementById(`tibinha-${numeroFinal}`)?.classList.add('selected');
-            document.getElementById(`tibinha-${numeroFinal}`)?.classList.remove('notSelected');
-            numeroFinalTibinha = numeroFinal;
-            document.getElementById('tibinhaRoll2').disabled = false
-        }, 3000); // Tempo total da roleta (3 segundos)
-    });
+                    const numeroFinal = numeros[Math.floor(Math.random() * numeros.length)];
+                    const elementoFinal = document.getElementById(`tibinha-${numeroFinal}`);
+                    elementoFinal?.classList.add('selected');
+                    elementoFinal?.classList.remove('notSelected');
+                    numeroFinaltibinha = numeroFinal;
+                    document.getElementById('tibinhaRoll').disabled = false;
+                }, finalDelay);
+            }, 1000);
+        }, 1000);
+    }, 1000);
 }
 
 function generateUniqueRandomNumbers(min, max) {
@@ -285,7 +338,7 @@ function revelarDesafio() {
         {text: "Não pode usar Smite", id: '2'},
         {text: "Inverter lane com o tibinha (tibinha vai pra jungle e vc pro top)", id: '3'},
         {text: "Não pode gankar o tibinha", id: '4'},
-        {text: "Voce tem que buildar o item => (random item aqui)", id: '5'},
+        {text: `Voce tem que buildar o item => <img src='../datadragon/imagens/item/${itemsInfo[Math.floor(Math.random() * itemsInfo.length)].image.full}'/>`, id: '5'},
         {text: "Divar uma lane AGORA", id: '6'},
         {text: "Camera fixa", id: '7'},
         {text: "Não pode wardar nem usar trincket", id: '8'},
