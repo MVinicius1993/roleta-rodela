@@ -52,3 +52,7 @@ button:active {
     box-shadow: none;
     color: #cdbe9130;
 }
+
+.desafioSpan {
+    color: #cdbe91;
+}

@@ -186,6 +186,9 @@ async function getSupportChampions() {
 async function rodilRoll() {
     const numeros = championsPool1.map(e => parseInt(e.key));
 
+    const divChampions = document.getElementById('champions')
+    debugger
+
     for (const numId of numeros) {
         document.getElementById(`rodil-${numeroFinalRodil}`)?.classList.add('notSelected');
         document.getElementById(`rodil-${numeroFinalRodil}`)?.classList.remove('selected');
@@ -251,9 +254,12 @@ async function rodilRoll() {
 async function tibinhaRoll() {
     const numeros = championsPool2.map(e => parseInt(e.key));
 
+    const divChampions = document.getElementById('champions2')
+    divChampions.innerHTML = ''
+
     for (const numId of numeros) {
-        document.getElementById(`tibinha-$numeroFinalTibinha}`)?.classList.remove('selected');
-        document.getElementById(`tibinha-$numeroFinalTibinha}`)?.classList.add('notSelected');
+        document.getElementById(`tibinha-${numeroFinalTibinha}`)?.classList.add('notSelected');
+        document.getElementById(`tibinha-${numeroFinalTibinha}`)?.classList.remove('selected');
         document.getElementById('tibinhaRoll2').disabled = true
     }
     
@@ -305,8 +311,8 @@ async function tibinhaRoll() {
                     const elementoFinal = document.getElementById(`tibinha-${numeroFinal}`);
                     elementoFinal?.classList.add('selected');
                     elementoFinal?.classList.remove('notSelected');
-                    numeroFinaltibinha = numeroFinal;
-                    document.getElementById('tibinhaRoll').disabled = false;
+                    numeroFinalTibinha = numeroFinal;
+                    document.getElementById('tibinhaRoll2').disabled = false;
                 }, finalDelay);
             }, 1000);
         }, 1000);
@@ -332,16 +338,18 @@ function generateUniqueRandomNumbers(min, max) {
 
 function revelarDesafio() {
 
+    const itemSort = itemsInfo[Math.floor(Math.random() * itemsInfo.length)]; 
+
     const desafiosText = [
         {text: "Trocar hotkey do Flash com a Ultimate", id: '1'},
         {text: "Não pode usar Smite", id: '2'},
-        {text: "Inverter lane com o tibinha (tibinha vai pra jungle e vc pro top)", id: '3'},
+        {text: "Inverter lane com o tibinha", id: '3'},
         {text: "Não pode gankar o tibinha", id: '4'},
-        {text: `Voce tem que buildar o item => <img src='${isLocal ? '..' : 'https://mvinicius1993.github.io/roleta-rodela'}/datadragon/imagens/item/${itemsInfo[Math.floor(Math.random() * itemsInfo.length)].image.full}'/>`, id: '5'},
+        {text: `Voce tem que buildar ${itemSort.name}  <img style="width: 30px"src='${isLocal ? '..' : 'https://mvinicius1993.github.io/roleta-rodela'}/datadragon/imagens/item/${itemSort.image.full}'/>`, id: '5'},
         {text: "Divar uma lane AGORA", id: '6'},
         {text: "Camera fixa", id: '7'},
         {text: "Não pode wardar nem usar trincket", id: '8'},
-        {text: "Tibinha não pode sair da top side (so no rio e top)", id: '9'},
+        {text: "Tibinha não pode sair da top side", id: '9'},
         {text: "A cada 5 minutos o tibinha se mata", id: '10'},
         {text: "A cada 5 minutos o rodil se mata na top lane", id: '11'}
     ]
@@ -368,7 +376,9 @@ function revelarDesafio() {
     
     // Criar e adicionar o novo span
     const span = document.createElement('span');
-    span.innerHTML = selectedDesafio.text;
+    span.innerHTML = selectedDesafio.text.toUpperCase();
+    span.style.height = '50px'
+    span.classList.add('desafioSpan')
     span.id = `desafio-${selectedDesafio.id}`; // Atribuir um ID único ao span
     htmlDesafios.appendChild(span);
 }
