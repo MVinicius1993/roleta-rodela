@@ -11,7 +11,7 @@ let championsPool2;
 let numeroFinalRodil;
 let numeroFinalTibinha;
 let desafios;
-let isLocal = true
+let isLocal = false
 
 let index = 0;
 const delay1 = 150;
