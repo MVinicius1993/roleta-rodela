@@ -183,8 +183,6 @@ async function getSupportChampions() {
     return champions;
 }
 
-//xdd
-
 async function rodilRoll() {
     const numeros = championsPool1.map(e => parseInt(e.key));
 
@@ -359,7 +357,7 @@ function revelarDesafio() {
         {text: "Não pode usar Smite", id: '2'},
         {text: "Inverter lane com o tibinha", id: '3'},
         {text: "Não pode gankar o tibinha", id: '4'},
-        {text: `Voce tem que buildar ${itemSort.name}  <img style="width: 30px"src='${isLocal ? '..' : 'https://mvinicius1993.github.io/roleta-rodela'}/datadragon/imagens/item/${itemSort.image.full}'/>`, id: '5'},
+        {text: `Voce tem que buildar ${itemSort.name}  <img style="width: 30px" src='${isLocal ? '..' : 'https://mvinicius1993.github.io/roleta-rodela'}/datadragon/imagens/item/${itemSort.image.full}'/>`, id: '5'},
         {text: "Divar uma lane AGORA", id: '6'},
         {text: "Camera fixa", id: '7'},
         {text: "Não pode wardar nem usar trincket", id: '8'},
