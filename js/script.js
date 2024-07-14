@@ -183,6 +183,8 @@ async function getSupportChampions() {
     return champions;
 }
 
+//xdd
+
 async function rodilRoll() {
     const numeros = championsPool1.map(e => parseInt(e.key));
 
