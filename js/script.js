@@ -388,7 +388,7 @@ function revelarDesafio() {
     
     // Criar e adicionar o novo span
     const span = document.createElement('span');
-    span.innerHTML = selectedDesafio.text.toUpperCase();
+    span.innerHTML = selectedDesafio.text;
     span.style.height = '50px'
     span.classList.add('desafioSpan')
     span.id = `desafio-${selectedDesafio.id}`; // Atribuir um ID único ao span
