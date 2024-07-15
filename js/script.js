@@ -373,7 +373,8 @@ function revelarDesafio() {
         {text: "OS DOIS USAM O ULTIMATE BRAVERY (RUNAS)", id: '17'},
         {text: "USAR 3X O FLASH DO LADO DE UM ALIADO", id: '18'},
         {text: "OS DOIS USAM A MESMA RUNA", id: '19'},
-        {text: "RODELA SÓ PODE JOGAR NO RIO", id: '20'}
+        {text: "RODELA SÓ PODE JOGAR NO RIO", id: '20'},
+        {text: "COPIAR OS ITENS DO LANER INIMIGO", id: '21'}
     ]
 
     const htmlDesafios = document.getElementById('desafios');
