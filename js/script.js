@@ -26,7 +26,7 @@ async function main() {
 
     itemsInfo = await getItems();
     championsPositions = await setChampionsPositions(championsInfo, positionsInfo)
-    desafios = generateUniqueRandomNumbers(1, 9)
+    desafios = generateUniqueRandomNumbers(1, 22)
 }
 
 async function getChampionsInfo() {
