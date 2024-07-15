@@ -374,7 +374,8 @@ function revelarDesafio() {
         {text: "USAR 3X O FLASH DO LADO DE UM ALIADO", id: '18'},
         {text: "OS DOIS USAM A MESMA RUNA", id: '19'},
         {text: "RODELA SÓ PODE JOGAR NO RIO", id: '20'},
-        {text: "COPIAR OS ITENS DO LANER INIMIGO", id: '21'}
+        {text: "COPIAR OS ITENS DO LANER INIMIGO", id: '21'},
+        {text: "COMUNICAÇÃO APENAS EM INGLÊSS", id: '22'}
     ]
 
     const htmlDesafios = document.getElementById('desafios');
