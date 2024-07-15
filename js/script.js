@@ -353,17 +353,27 @@ function revelarDesafio() {
     const itemSort = itemsInfo[Math.floor(Math.random() * itemsInfo.length)]; 
 
     const desafiosText = [
-        {text: "Trocar hotkey do Flash com a Ultimate", id: '1'},
-        {text: "Não pode usar Smite", id: '2'},
-        {text: "Inverter lane com o tibinha", id: '3'},
-        {text: "Não pode gankar o tibinha", id: '4'},
-        {text: `Voce tem que buildar ${itemSort.name}  <img style="width: 30px" src='${isLocal ? '..' : 'https://mvinicius1993.github.io/roleta-rodela'}/datadragon/imagens/item/${itemSort.image.full}'/>`, id: '5'},
-        {text: "Divar uma lane AGORA", id: '6'},
-        {text: "Camera fixa", id: '7'},
-        {text: "Não pode wardar nem usar trincket", id: '8'},
-        {text: "Tibinha não pode sair da top side", id: '9'},
-        {text: "A cada 5 minutos o tibinha se mata", id: '10'},
-        {text: "A cada 5 minutos o rodil se mata na top lane", id: '11'}
+        {text: "INVERTER LANE COM O TIBINHA", id: '1'},
+        {text: "JOGAR SÓ COM CAMPEÕES SUP", id: '2'},
+        {text: "JOGAR SÓ COM CAMPEÕES ADC", id: '3'},
+        {text: "NÃO PODE USAR FLASH", id: '4'},
+        {text: "NÃO PODE USAR B O JOGO TODO", id: '5'},
+        // {text: `Voce tem que buildar ${itemSort.name}  <img style="width: 30px" src='${isLocal ? '..' : 'https://mvinicius1993.github.io/roleta-rodela'}/datadragon/imagens/item/${itemSort.image.full}'/>`, id: '5'},
+        {text: "NÃO PODE SMITAR O DRAGAO", id: '6'},
+        {text: "NÃO PODE SMITAR O BARÃO", id: '7'},
+        {text: "TROCAR O FLASH/GHOST POR PURIFICAR", id: '8'},
+        {text: "SÓ PODE COMPRAR ITEM A VISTA", id: '9'},
+        {text: "TIBINHA FICA NO PROXY O JOGO TODO", id: '10'},
+        {text: "AMBOS FAZEM FULL CRITICO", id: '11'},
+        {text: "AMBOS FAZEM FULL AP", id: '12'},
+        {text: "ESCOLHER 1 ITEM PARA O AMIGO FAZER", id: '13'},
+        {text: "OS DOIS FAZEM BUILD IGUAL", id: '14'},
+        {text: "SMITAR A CATAPA SEMPRE QUE FOR GANKAR", id: '15'},
+        {text: "OS DOIS USAM O ULTIMATE BRAVERY (ITENS)", id: '16'},
+        {text: "OS DOIS USAM O ULTIMATE BRAVERY (RUNAS)", id: '17'},
+        {text: "USAR 3X O FLASH DO LADO DE UM ALIADO", id: '18'},
+        {text: "OS DOIS USAM A MESMA RUNA", id: '19'},
+        {text: "RODELA SÓ PODE JOGAR NO RIO", id: '20'}
     ]
 
     const htmlDesafios = document.getElementById('desafios');
